@@ -193,7 +193,7 @@ public class ResourcePool<R> {
         // get process which reserved the resource
         Long ownerThreadId = locked.get(resource);
         // if current thread is resource owner - no need to unlock. But call notifyAll - to notify other threads that resource released
-        if (ownerThreadId == Thread.currentThread().getId()) {
+        if (ownerThreadId.equals(Thread.currentThread().getId())) {
             synchronized (resource) {
                 resource.notifyAll();
             }
